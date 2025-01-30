@@ -73,28 +73,21 @@ public class SingleLinkedList {
     }
 
     public void deleteInLinkedList(int nodeValue, int location){
-        Node node = new Node();
-        node.value = nodeValue;
         if (head == null) {
-            createLinkedList(nodeValue);
-            return;
+            System.out.println("Linked list dosen't exist!");
         } else if (location == 0) {
-            node.next = head;
-            head = node;
+            head = head.next;
+            size--;
+        } else if (size == 0) {
+            tail = null;
+            size--;
         } else if (location >= size) {
-            tail.next = node;
-            node.next = null;
-            tail = node;
-        } else {
             Node tempNode = head;
-            int index = 0;
-            while (index < location - 1) {
+            for (int i = 0; i < size - 2;) {
                 tempNode = tempNode.next;
-                index--;
+                tempNode.next = tempNode.next.next;
+                size--;
             }
-            Node nextNode = node;
-            node.next = nextNode;
         }
-        size--;
     }
 }
