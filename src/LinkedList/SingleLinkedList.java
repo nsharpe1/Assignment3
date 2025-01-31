@@ -5,7 +5,7 @@ public class SingleLinkedList {
     public Node tail;
     public int size;
 
-    public Node createLinkedList (int nodeValue) {
+    public Node createLinkedList(int nodeValue) {
         Node node = new Node();
         node.next = null;
         node.value = nodeValue;
@@ -14,6 +14,13 @@ public class SingleLinkedList {
         size = 1;
         return head;
     }
+
+    //Insert int linked list
+
+    //0. if the link doesn't
+    //1. inserting at the begining
+    //2. inserting at the ending
+    //3. inserting anywhere
 
     public void insertInLinkedList(int nodeValue, int location) {
         Node node = new Node();
@@ -48,7 +55,7 @@ public class SingleLinkedList {
             Node temNode = head;
             for (int i = 0; i < size; i++) {
                 System.out.print(temNode.value);
-                if (i != size -1 ) {
+                if (i != size - 1) {
                     System.out.print(" -> ");
                 }
                 temNode = temNode.next;
@@ -57,7 +64,7 @@ public class SingleLinkedList {
         }
     }
 
-    public boolean searchNode (int nodeValue) {
+    public boolean searchNode(int nodeValue) {
         if (head != null) {
             Node tempNode = head;
             for (int i = 0; i < size; i++) {
@@ -72,22 +79,38 @@ public class SingleLinkedList {
         return false;
     }
 
-    public void deleteInLinkedList(int nodeValue, int location){
+    //Deleting a Node from the linked list
+
+    //0. if the link doesn't
+    //1. delete at the begining
+    //2. delete at the ending
+    //3. delete anywhere
+
+    public void deleteInLinkedList(int location) {
         if (head == null) {
-            System.out.println("Linked list dosen't exist!");
+            System.out.println("Linked list doesn't exist!");
         } else if (location == 0) {
             head = head.next;
             size--;
-        } else if (size == 0) {
-            tail = null;
-            size--;
         } else if (location >= size) {
-            Node tempNode = head;
-            for (int i = 0; i < size - 2;) {
-                tempNode = tempNode.next;
-                tempNode.next = tempNode.next.next;
-                size--;
+            System.out.println("Invalid location!");
+        } else if (location == size - 1) {
+            Node temNode = head;
+            for (int i = 0; i < size; i++) {
+                if (temNode.next.next == null) {
+                    temNode = tail;
+                    size--;
+                }
+                temNode = temNode.next;
             }
+        } else {
+            Node temNode = head;
+            for (int i = 0; i < location -1; i++) {
+                //System.out.println(temNode.value);
+                temNode = temNode.next;
+            }
+            temNode.next = temNode.next.next;
+            size--;
         }
     }
 }
